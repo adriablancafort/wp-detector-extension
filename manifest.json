@@ -14,9 +14,12 @@
         "service_worker": "sw.js"
     },
     "permissions": [
+        "webRequest",
+        "tabs",
         "activeTab"
     ],
     "host_permissions": [
-        "https://api.wp-detector.com/"
+        "https://api.wp-detector.com/",
+        "<all_urls>"
     ]
 }
