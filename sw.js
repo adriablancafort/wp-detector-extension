@@ -1,5 +1,5 @@
 // Change the color of the browser extension badge
-const set_badge_color = async (wp) => {
+const set_badge_color = (wp) => {
   green = [2, 217, 88, 255];
   red = [255, 40, 83, 255];
   let color = wp ? green : red;
