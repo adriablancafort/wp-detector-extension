@@ -4,8 +4,14 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
   let oldUrl = "";
 
+  let detected = false;
+
   inputForm.addEventListener("submit", (event) => {
     event.preventDefault();
+
+    detected = !detected;
+
+    chrome.runtime.sendMessage({ message: "set_badge_color", detected: detected });
 
     // Get the inputUrl url
     let inputUrl = document.getElementById("inputUrl").value;
