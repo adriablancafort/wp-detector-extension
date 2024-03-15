@@ -1,41 +1,22 @@
-let pageRequests = {};
+// Change the color of the browser extension badge
+const set_badge_color = async (wp) => {
+  let color = wp ? [2, 217, 88, 255] : [255, 40, 83, 255];
+  chrome.action.setBadgeBackgroundColor({ color: color });
+  chrome.action.setBadgeText({ text: " " });
+  pageRequests[details.tabId] = [];
+};
 
-chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-    if (changeInfo.status === 'loading') {
-        // Reset the badge to red when a new page starts loading
-        chrome.action.setBadgeBackgroundColor({ color: [255, 40, 83, 255] });
-        chrome.action.setBadgeText({ text: ' ' });
-
-        // Reset the requests for the tab
-        pageRequests[tabId] = [];
-    }
+// Set the color badge to false by default
+chrome.tabs.onActivated.addListener(() => {
+  set_badge_color(false);
 });
 
-chrome.webRequest.onBeforeRequest.addListener(
-    function(details) {
-        // Add the request to the tab's requests
-        pageRequests[details.tabId].push(details.url);
-
-        // Check if the URL contains '/wp-content/'
-        if (details.url.includes('/wp-content/')) {
-            // Set the badge to green and clear the tab's requests
-            chrome.action.setBadgeBackgroundColor({ color: [2, 217, 88, 255] });
-            chrome.action.setBadgeText({ text: ' ' });
-            pageRequests[details.tabId] = [];
+// Change the color badge if a page request contains /wp-content/
+chrome.webRequest.onCompleted.addListener(
+    (details) => {
+        if (details.url.includes("/wp-content/")) {
+            set_badge_color(true);
         }
     },
     { urls: ["<all_urls>"] }
 );
-
-chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-    if (changeInfo.status === 'complete') {
-        // If the page has finished loading and '/wp-content/' was not found in any request, set the badge to red
-        if (!pageRequests[tabId].some(url => url.includes('/wp-content/'))) {
-            chrome.action.setBadgeBackgroundColor({ color: [255, 40, 83, 255] });
-            chrome.action.setBadgeText({ text: ' ' });
-        }
-
-        // Clear the tab's requests
-        pageRequests[tabId] = [];
-    }
-});
