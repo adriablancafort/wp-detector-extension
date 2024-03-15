@@ -1,6 +1,8 @@
 // Change the color of the browser extension badge
 const set_badge_color = async (wp) => {
-  let color = wp ? [2, 217, 88, 255] : [255, 40, 83, 255];
+  green = [2, 217, 88, 255];
+  red = [255, 40, 83, 255];
+  let color = wp ? green : red;
   chrome.action.setBadgeBackgroundColor({ color: color });
   chrome.action.setBadgeText({ text: " " });
   pageRequests[details.tabId] = [];
