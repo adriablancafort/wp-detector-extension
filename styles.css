@@ -1,3 +1,7 @@
+:root {
+  color-scheme: light dark;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -6,13 +10,14 @@
 }
 
 body {
-  background-color: #eff2ff;
-  color: #1e1e1e;
+  color: light-dark(#333b3c, #efefec);
+  background-color: light-dark(#efedea, #223a2c);
+
   scroll-behavior: smooth;
 
   font-size: 16px;
-  width: 500px;
-  height: 500px;
+  width: 480px;
+  height: 480px;
 }
 
 img {
@@ -37,7 +42,7 @@ button:hover {
 }
 
 .border {
-  border: 1px solid #cbcbcb;
+  border: 1px solid #535353;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -58,13 +63,15 @@ button:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #f8f8f8;
+  color: #eff2ff;
+  background-color: #2f2f2f;
   padding: 0.5rem;
   border-radius: 8px;
   animation: fade-in-up 0.8s ease-out;
 }
 
 .input--input {
+  color: #eff2ff;
   border: none;
   outline: none;
   background: none;
@@ -109,14 +116,14 @@ button:hover {
 
 .card {
   border-radius: 8px;
-  background-color: #f8f8f8;
+  background-color: #2f2f2f;
   overflow: hidden;
   margin-top: 1rem;
   transition: all 0.1s;
 }
 
 .card--hover:hover {
-  background-color: #ffffff;
+  background-color: #454545;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
 
