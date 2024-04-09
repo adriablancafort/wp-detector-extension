@@ -1,3 +1,6 @@
+// Listen for new tab / tab changes
+
+
 // Listen for messages
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.message === "set_badge_color") {
