@@ -1,6 +1,3 @@
-:root {
-  color-scheme: light dark;
-}
 
 * {
   margin: 0;
@@ -10,9 +7,8 @@
 }
 
 body {
-  color: light-dark(#333b3c, #efefec);
-  background-color: light-dark(#efedea, #223a2c);
-
+  background-color: #eff2ff;
+  color: #1e1e1e;
   scroll-behavior: smooth;
 
   font-size: 16px;
@@ -42,7 +38,7 @@ button:hover {
 }
 
 .border {
-  border: 1px solid #535353;
+  border: 1px solid #cbcbcb;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -63,15 +59,13 @@ button:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: #eff2ff;
-  background-color: #2f2f2f;
+  background-color: #f8f8f8;
   padding: 0.5rem;
   border-radius: 8px;
   animation: fade-in-up 0.8s ease-out;
 }
 
 .input--input {
-  color: #eff2ff;
   border: none;
   outline: none;
   background: none;
@@ -116,14 +110,14 @@ button:hover {
 
 .card {
   border-radius: 8px;
-  background-color: #2f2f2f;
+  background-color: #f8f8f8;
   overflow: hidden;
   margin-top: 1rem;
   transition: all 0.1s;
 }
 
 .card--hover:hover {
-  background-color: #454545;
+  background-color: #ffffff;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
 
@@ -203,7 +197,7 @@ button:hover {
   position: absolute;
   bottom: 1.5rem;
   right: 1.5rem;
-  font-weight: 600;
+  font-weight: 700;
   display: flex;
   align-items: center;
   cursor: pointer;
