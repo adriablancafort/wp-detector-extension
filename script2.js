@@ -3,15 +3,18 @@ const find_wp_content = () => {
   return document.documentElement.innerHTML.includes("wp-content");
 };
 
-// Sends a message to the service worker to change the color of the browser extension badge
-const set_badge_color = (detected) => {
-  chrome.runtime.sendMessage({
-    message: "set_badge_color",
-    detected: detected,
-  });
+// Stores a Key-Value pair in the local storage
+const setStorage = async (key, value) => {
+  await chrome.storage.local.set({ [key]: value });
+}
+
+// Gets the url of the current tab
+const getCurrentTabUrl = async () => {
+  let [tab] = await chrome.tabs.queryActiveTab();
+  return tab.url;
 };
 
-// Runs the function that detects wordpress on the page laod
-const wp_detected = find_wp_content();
-
-set_badge_color(wp_detected);
+// Stores if the website is using WordPress or not
+getCurrentTabUrl().then((url) => {
+  setStorage(url, find_wp_content());
+});

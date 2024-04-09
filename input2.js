@@ -2,19 +2,35 @@ document.addEventListener("DOMContentLoaded", (event) => {
   const outputContainer = document.getElementById("outputContainer");
   outputContainer.innerHTML = detectWpSkeleton;
 
-  // Listen for messages
-  chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.message === "set_detect_wp_card") {
-      if (request.detected) {
+  // Get the current website from the local storage
+    if (request.detected) {
         outputContainer.innerHTML = detectWpSuccess;
-      } else {
+    } else {
         outputContainer.innerHTML = detectWpFail;
-      }
     }
-  });
+
 });
 
 // Functions
+
+// Gets the url of the current tab
+const getStorage = async (key) => {
+  let result = await chrome.storage.local.get(key);
+  return result[key];
+}
+
+// Gets the url of the current tab
+const getStorage = async (key) => {
+  let result = await chrome.storage.local.get(key);
+  return result[key];
+}
+
+// Gets from storage if the url is using WordPress or not
+getCurrentTabUrl().then((url) => {
+  getStorage(url).then((value) => {
+    console.log(value);
+  });
+});
 
 const apiRequest = (inputUrl, type) => {
   return fetch(
