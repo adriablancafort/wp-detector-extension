@@ -10,7 +10,7 @@ const set_badge_color = (detected) => {
 // Send a message to the content scripts to know if wp was detected
 const sendMessageToTab = (tabId) => {
   chrome.tabs.sendMessage(tabId, { message: "wp_detected" }, (response) => {
-    if (response.detected !== undefined) {
+    if (response && response.detected !== undefined) {
       set_badge_color(response.detected);
     }
   });

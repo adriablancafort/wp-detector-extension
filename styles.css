@@ -24,19 +24,6 @@ p {
   margin-bottom: 0.3rem;
 }
 
-button {
-  color: #fff;
-  background-color: #3858e9;
-  border-radius: 2px;
-  font-size: 18px;
-  font-weight: 600;
-  padding: 0.5rem 1rem;
-}
-
-button:hover {
-  background-color: #213fd4;
-}
-
 .border {
   border: 1px solid #cbcbcb;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -53,29 +40,6 @@ button:hover {
 .container__input {
   max-width: 500px;
   min-height: 40vh;
-}
-
-.input--form {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #f8f8f8;
-  padding: 0.5rem;
-  border-radius: 8px;
-  animation: fade-in-up 0.8s ease-out;
-}
-
-.input--input {
-  border: none;
-  outline: none;
-  background: none;
-  font-size: 1.2em;
-  margin: 0 1rem;
-  width: full;
-}
-
-.button__input {
-  border-radius: 4px;
 }
 
 .input--section-title {

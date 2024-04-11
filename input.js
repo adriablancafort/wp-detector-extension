@@ -1,92 +1,37 @@
-document.addEventListener("DOMContentLoaded", (event) => {
-  const inputForm = document.getElementById("inputForm");
-  const outputContainer = document.getElementById("outputContainer");
+document.addEventListener("DOMContentLoaded", () => {
+  const wpContainer = document.getElementById("wpContainer");
+  const themesContainer = document.getElementById("themesContainer");
+  const pluginsContainer = document.getElementById("pluginsContainer");
 
-  let oldUrl = "";
+  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    let currentUrl = tabs[0].url;
+    const websiteName = formatWebsiteName(currentUrl);
 
-  inputForm.addEventListener("submit", (event) => {
-    event.preventDefault();
+    // Wordpress Detected container
+    wpContainer.innerHTML += detectWpSkeleton;
 
-    // Get the inputUrl url
-    let inputUrl = document.getElementById("inputUrl").value;
+    // Themes Detected container
+    themesContainer.innerHTML = analyzingThemesTitle(websiteName);
+    themesContainer.innerHTML += detectThemesSkeleton;
 
-    if (oldUrl !== inputUrl) {
-      const websiteName = formatWebsiteName(inputUrl);
+    // Plugins Detected container
+    pluginsContainer.innerHTML = analyzingPluginsTitle(websiteName);
+    pluginsContainer.innerHTML += detectPluginsSkeleton;
+    pluginsContainer.innerHTML += detectPluginsSkeleton;
+    pluginsContainer.innerHTML += detectPluginsSkeleton;
 
-      // Wordpress Detected container
-      outputContainer.innerHTML = "";
-      const wpContainer = document.createElement("div");
-      outputContainer.appendChild(wpContainer);
-      wpContainer.innerHTML = analyzingResultsTitle(websiteName);
-      wpContainer.innerHTML += detectWpSkeleton;
+    chrome.tabs.sendMessage(
+      tabs[0].id,
+      { message: "wp_detected" },
+      function (response) {
+        if (response && response.detected !== undefined) {
+          if (response.detected) {
+            wpContainer.innerHTML = detectWpSuccess(websiteName);
 
-      // Themes Detected container
-      const themesContainer = document.createElement("div");
-      outputContainer.appendChild(themesContainer);
-      themesContainer.innerHTML = analyzingThemesTitle(websiteName);
-      themesContainer.innerHTML += detectThemesSkeleton;
+            apiRequest(currentUrl, "themes").then((data) => {
+              themesContainer.innerHTML = detectThemesTitle(websiteName);
 
-      // Plugins Detected container
-      const pluginsContainer = document.createElement("div");
-      outputContainer.appendChild(pluginsContainer);
-      pluginsContainer.innerHTML = analyzingPluginsTitle(websiteName);
-      pluginsContainer.innerHTML += detectPluginsSkeleton;
-      pluginsContainer.innerHTML += detectPluginsSkeleton;
-      pluginsContainer.innerHTML += detectPluginsSkeleton;
-
-      if (validateUrl(inputUrl)) {
-        oldUrl = inputUrl;
-        inputUrl = sanatizeUrl(inputUrl);
-
-        apiRequest(inputUrl, "wp")
-          .then((data) => {
-            wpContainer.innerHTML = showingResultsTitle(websiteName);
-
-            if (data.wp === true) {
-              wpContainer.innerHTML += detectWpSuccess(websiteName);
-
-              apiRequest(inputUrl, "themes").then((data) => {
-                themesContainer.innerHTML = detectThemesTitle(websiteName);
-
-                if (data.themes) {
-                  data.themes.forEach((theme) => {
-                    const themeCard = document.createElement("div");
-                    themeCard.innerHTML = detectThemesCard(theme);
-                    if (theme.link) {
-                      themeCard.addEventListener("click", () => {
-                        window.open(theme.link, "_blank");
-                      });
-                    }
-                    themesContainer.appendChild(themeCard);
-                  });
-                } else {
-                  themesContainer.innerHTML += noThemesDetected(websiteName);
-                }
-              });
-
-              apiRequest(inputUrl, "plugins").then((data) => {
-                pluginsContainer.innerHTML = detectPluginsTitle(websiteName);
-
-                if (data.plugins) {
-                  data.plugins.forEach((plugin) => {
-                    const pluginCard = document.createElement("div");
-                    pluginCard.innerHTML = detectPluginsCard(plugin);
-                    if (plugin.link) {
-                      pluginCard.addEventListener("click", () => {
-                        window.open(plugin.link, "_blank");
-                      });
-                    }
-                    pluginsContainer.appendChild(pluginCard);
-                  });
-                } else {
-                  pluginsContainer.innerHTML += noPluginsDetected(websiteName);
-                }
-              });
-            } else if (data.wp === false) {
-              wpContainer.innerHTML += detectWpFail(websiteName);
-
-              apiRequest(inputUrl, "top-themes").then((data) => {
-                themesContainer.innerHTML = topThemesTitle;
+              if (data.themes) {
                 data.themes.forEach((theme) => {
                   const themeCard = document.createElement("div");
                   themeCard.innerHTML = detectThemesCard(theme);
@@ -97,10 +42,15 @@ document.addEventListener("DOMContentLoaded", (event) => {
                   }
                   themesContainer.appendChild(themeCard);
                 });
-              });
+              } else {
+                themesContainer.innerHTML += noThemesDetected(websiteName);
+              }
+            });
 
-              apiRequest(inputUrl, "top-plugins").then((data) => {
-                pluginsContainer.innerHTML = topPluginsTitle;
+            apiRequest(currentUrl, "plugins").then((data) => {
+              pluginsContainer.innerHTML = detectPluginsTitle(websiteName);
+
+              if (data.plugins) {
                 data.plugins.forEach((plugin) => {
                   const pluginCard = document.createElement("div");
                   pluginCard.innerHTML = detectPluginsCard(plugin);
@@ -111,18 +61,44 @@ document.addEventListener("DOMContentLoaded", (event) => {
                   }
                   pluginsContainer.appendChild(pluginCard);
                 });
+              } else {
+                wpContainer.innerHTML += detectWpFail(websiteName);
+              }
+            });
+          } else {
+            wpContainer.innerHTML = detectWpFail(currentUrl);
+
+            apiRequest(currentUrl, "top-themes").then((data) => {
+              themesContainer.innerHTML = topThemesTitle;
+              data.themes.forEach((theme) => {
+                const themeCard = document.createElement("div");
+                themeCard.innerHTML = detectThemesCard(theme);
+                if (theme.link) {
+                  themeCard.addEventListener("click", () => {
+                    window.open(theme.link, "_blank");
+                  });
+                }
+                themesContainer.appendChild(themeCard);
               });
-            }
-          })
-          .catch(() => {
-            outputContainer.innerHTML = showingResultsTitle(websiteName);
-            outputContainer.innerHTML += htmlRetrieveError(websiteName);
-          });
-      } else {
-        oldUrl = "";
-        outputContainer.innerHTML = invalidUrl;
+            });
+
+            apiRequest(currentUrl, "top-plugins").then((data) => {
+              pluginsContainer.innerHTML = topPluginsTitle;
+              data.plugins.forEach((plugin) => {
+                const pluginCard = document.createElement("div");
+                pluginCard.innerHTML = detectPluginsCard(plugin);
+                if (plugin.link) {
+                  pluginCard.addEventListener("click", () => {
+                    window.open(plugin.link, "_blank");
+                  });
+                }
+                pluginsContainer.appendChild(pluginCard);
+              });
+            });
+          }
+        }
       }
-    }
+    );
   });
 });
 
@@ -135,46 +111,14 @@ const formatWebsiteName = (url) => {
   return url;
 };
 
-const validateUrl = (string) => {
-  let pattern = new RegExp(
-    "^(https?:\\/\\/)?" + // validate protocol
-      "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // validate domain name
-      "((\\d{1,3}\\.){3}\\d{1,3}))" + // validate OR ip (v4) address
-      "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // validate port and path
-      "(\\?[;&a-z\\d%_.~+=-]*)?" + // validate query string
-      "(\\#[-a-z\\d_]*)?$",
-    "i"
-  ); // validate fragment locator
-  return !!pattern.test(string);
-};
-
-const sanatizeUrl = (url) => {
-  url = url.replace(/\/+$/, ""); // Remove / at the end of the URL if needed
-  if (!/^https?:\/\//i.test(url)) {
-    // Add https:// if needed
-    url = "https://" + url;
-  }
-  return url;
-};
-
 const apiRequest = (inputUrl, type) => {
   return fetch(
-    `https://api.wp-detector.com?url=${inputUrl}&type=${type}`,
+    `https://wp-detector.000webhostapp.com?url=${inputUrl}&type=${type}`,
     { mode: "no-cors" }
   ).then((response) => response.json());
 };
 
 // Elements
-
-const invalidUrl = `
-<p class="input--invalid-message">
-  Invalid URL. Please enter a valid URL.
-</p>`;
-
-const analyzingResultsTitle = (websiteName) => `
-<h3 class="input--section-title input--section-title__analyzing">
-  Analyzing <strong>${websiteName}</strong>
-</h3>`;
 
 const analyzingThemesTitle = (websiteName) => `
 <h3 class="input--section-title input--section-title__analyzing">
@@ -234,19 +178,6 @@ const detectWpFail = (websiteName) => `
   <div>
     <h4 class="card--title cart--title__fail">Bad news...</h4>
     <p><strong>${websiteName}</strong> is not using WordPress.</p>
-  </div>
-</div>`;
-
-const htmlRetrieveError = (websiteName) => `
-<div class="card card__wp border">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36.277 32.736" class="card--icon" width="75" height="60">
-    <path fill="#464342" fill-rule="evenodd" d="M23.627 9.82H9.513l.337 3.274h13.442c-.197 2.868-.793 8.944-1.012 11.708l-7.55 2.125-.016.016-7.555-2.658-.518-6.28h3.704l.262 3.377 4.113 1.533h.01l4.107-1.473.423-5.074H6.476c-.062-.656-.856-9.18-.995-9.82h18.477c-.104 1.08-.209 2.19-.33 3.273ZM0 0l2.681 29.705 12.033 3.031 12.064-3.092L29.462 0Z"/>
-    <circle cx="30.379" cy="20.78" r="5.117" fill="#fff" paint-order="markers stroke fill"/>
-    <path fill="#ff2854" d="M36.277 21.034a6.008 6.008 0 1 1-6.008-6.008 6.007 6.007 0 0 1 6.008 6.008zm-5.163.008 2.3-2.302a.601.601 0 0 0-.85-.85l-2.3 2.302-2.302-2.301a.601.601 0 0 0-.85.85l2.303 2.301-2.302 2.301a.601.601 0 0 0 .85.85l2.3-2.302 2.302 2.302a.601.601 0 0 0 .85-.85z"/>
-  </svg>
-  <div>
-    <h4 class="card--title cart--title__fail">Bad news...</h4>
-    <p> We could not retrieve the HTML from: <strong>${websiteName}</strong>.</p>
   </div>
 </div>`;
 
