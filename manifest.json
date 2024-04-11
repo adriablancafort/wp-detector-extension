@@ -11,7 +11,7 @@
         }
     },
     "background": {
-        "service_worker": "sw.js"
+        "service_worker": "sw2.js"
     },
     "permissions": [
         "webRequest",
