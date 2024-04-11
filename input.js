@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
               }
             });
           } else {
-            wpContainer.innerHTML = detectWpFail(currentUrl);
+            wpContainer.innerHTML = detectWpFail(websiteName);
 
             apiRequest(currentUrl, "top-themes").then((data) => {
               themesContainer.innerHTML = topThemesTitle;
