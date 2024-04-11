@@ -3,18 +3,23 @@
   margin: 0;
   padding: 0;
   border: 0;
-  font-family: "Inter";
+  font-family: "Inter", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
 }
 
 body {
   background-color: #eff2ff;
   color: #1e1e1e;
-  scroll-behavior: smooth;
-
+  overflow-x: hidden;
   font-size: 16px;
-  width: 480px;
-  height: 480px;
+  width: 450px;
+  height: 450px;
 }
+
 
 img {
   -webkit-user-drag: none;
@@ -24,29 +29,23 @@ p {
   margin-bottom: 0.3rem;
 }
 
+h3 {
+  font-size: 18px;
+}
+
 .border {
   border: 1px solid #cbcbcb;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 1rem 1.5rem;
-}
-
-/* Input styles */
-
-.container__input {
-  max-width: 500px;
-  min-height: 40vh;
+  padding: 0.5rem 1rem 1.5rem 1.5rem;
 }
 
 .input--section-title {
   position: relative;
-  margin-top: 1.5rem;
+  margin-top: 1.2rem;
   text-align: center;
-  font-size: 1.2rem;
   font-weight: 400;
 }
 
@@ -94,7 +93,7 @@ p {
 }
 
 .card--icon {
-  margin-right: 1rem;
+  margin-right: 0.6rem;
   border-radius: 2px;
 }
 
@@ -103,7 +102,7 @@ p {
 }
 
 .card--title {
-  font-size: 2rem;
+  font-size: 1.8rem;
   margin-bottom: 0.3rem;
 }
 
@@ -154,13 +153,13 @@ p {
 
 .cart--read-more--container {
   position: relative;
-  height: 2.5rem;
+  height: 1.5rem;
 }
 
 .cart--read-more {
   position: absolute;
-  bottom: 1.5rem;
-  right: 1.5rem;
+  bottom: 0.8rem;
+  right: 1rem;
   font-weight: 700;
   display: flex;
   align-items: center;
