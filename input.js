@@ -164,7 +164,7 @@ const detectWpSuccess = (websiteName) => `
   </svg>
   <div>
     <h4 class="card--title cart--title__success">Hurray!</h4>
-    <p><strong>${websiteName}</strong> uses WordPress!</p>
+    <p><strong>${websiteName}</strong> is using WordPress!</p>
   </div>
 </div>`;
 
@@ -177,7 +177,7 @@ const detectWpFail = (websiteName) => `
   </svg>
   <div>
     <h4 class="card--title cart--title__fail">Bad news...</h4>
-    <p><strong>${websiteName}</strong> doesen't use WordPress.</p>
+    <p><strong>${websiteName}</strong> is not using WordPress.</p>
   </div>
 </div>`;
 
