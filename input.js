@@ -130,11 +130,6 @@ const analyzingPluginsTitle = (websiteName) => `
   Analyzing plugins in <strong>${websiteName}</strong>
 </h3>`;
 
-const showingResultsTitle = (websiteName) => `
-<h3 class="input--section-title">
-  Showing results for <strong>${websiteName}</strong>:
-</h3>`;
-
 const detectThemesTitle = (websiteName) => `
 <h3 class="input--section-title">
   Detected <strong>theme</strong> in ${websiteName}:
