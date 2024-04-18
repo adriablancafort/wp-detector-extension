@@ -68,7 +68,11 @@ document.addEventListener("DOMContentLoaded", () => {
           } else {
             wpContainer.innerHTML = detectWpFail(websiteName);
             themesContainer.innerHTML = topThemesTitle;
+            themesContainer.innerHTML += detectThemesSkeleton;
             pluginsContainer.innerHTML = topPluginsTitle;
+            themesContainer.innerHTML += detectPluginsSkeleton;
+            themesContainer.innerHTML += detectPluginsSkeleton;
+            themesContainer.innerHTML += detectPluginsSkeleton;
 
             apiRequest(currentUrl, "top-themes").then((data) => {
               data.themes.forEach((theme) => {
@@ -106,6 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const formatWebsiteName = (url) => {
   url = url.replace(/^(https?:\/\/)?/, "");
+  url = url.replace(/^(.*?)\./, "");
   url = url.replace(/\/.*$/, "");
   url = url.toLowerCase();
   return url;
