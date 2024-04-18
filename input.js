@@ -70,11 +70,12 @@ document.addEventListener("DOMContentLoaded", () => {
             themesContainer.innerHTML = topThemesTitle;
             themesContainer.innerHTML += detectThemesSkeleton;
             pluginsContainer.innerHTML = topPluginsTitle;
-            themesContainer.innerHTML += detectPluginsSkeleton;
-            themesContainer.innerHTML += detectPluginsSkeleton;
-            themesContainer.innerHTML += detectPluginsSkeleton;
+            pluginsContainer.innerHTML += detectPluginsSkeleton;
+            pluginsContainer.innerHTML += detectPluginsSkeleton;
+            pluginsContainer.innerHTML += detectPluginsSkeleton;
 
             apiRequest(currentUrl, "top-themes").then((data) => {
+              themesContainer.innerHTML = topThemesTitle;
               data.themes.forEach((theme) => {
                 const themeCard = document.createElement("div");
                 themeCard.innerHTML = detectThemesCard(theme);
@@ -88,6 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             apiRequest(currentUrl, "top-plugins").then((data) => {
+              pluginsContainer.innerHTML = topPluginsTitle;
               data.plugins.forEach((plugin) => {
                 const pluginCard = document.createElement("div");
                 pluginCard.innerHTML = detectPluginsCard(plugin);
@@ -110,8 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const formatWebsiteName = (url) => {
   url = url.replace(/^(https?:\/\/)?/, "");
-  url = url.replace(/^(.*?)\./, "");
-  url = url.replace(/\/.*$/, "");
+  url = url.replace(/^(.*?\.)?(.*?\..*?)\/.*$/, "$2");
   url = url.toLowerCase();
   return url;
 };
