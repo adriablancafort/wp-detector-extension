@@ -119,7 +119,7 @@ const formatWebsiteName = (url) => {
 
 const apiRequest = (inputUrl, type) => {
   return fetch(
-    `https://wp-detector.000webhostapp.com?url=${inputUrl}&type=${type}`,
+    `https://api.wp-detector.com?url=${inputUrl}&type=${type}`,
     { mode: "no-cors" }
   ).then((response) => response.json());
 };
@@ -201,9 +201,9 @@ const detectThemesCard = (theme) => `
     <p>Website: <a href="${theme.website}" target="_blank">${
       theme.sanatizedWebsite
     }</a></p>
-    <p>WordPress Version: <strong>${theme.reqWpVersion} or higher</strong></p>
+    <p>WordPress Version: <strong>${theme.reqWpVersion}</strong></p>
     <p>Tested up To: <strong>${theme.testedWpVersion}</strong></p>
-    <p>PHP Version: <strong>${theme.reqPhpVersion} or higher</strong></p>
+    <p>PHP Version: <strong>${theme.reqPhpVersion}</strong></p>
     <p class="card--description">
       <strong>Description:</strong> ${theme.description}
     </p>
@@ -266,14 +266,14 @@ const detectPluginsCard = (plugin) => `
       }" alt="Plugin Icon" class="card--icon" width="45px" height="45px" />
       <h4 class="card--title">${plugin.title}</h4>
     </div>
-    <p>Author: <strong>${plugin.author}</strong></p>
+    <p>Contributors: <strong>${plugin.contributors}</strong></p>
     <p>Version: <span class="badge">${plugin.version}</span></p>
     <p>Website: <a href="${plugin.website}" target="_blank">${
       plugin.sanatizedWebsite
     }</a></p>
-    <p>WordPress Version: <strong>${plugin.reqWpVersion} or higher</strong></p>
+    <p>WordPress Version: <strong>${plugin.reqWpVersion}</strong></p>
     <p>Tested up To: <strong>${plugin.testedWpVersion}</strong></p>
-    <p>PHP Version: <strong>${plugin.reqPhpVersion} or higher</strong></p>
+    <p>PHP Version: <strong>${plugin.reqPhpVersion}</strong></p>
     <p class="card--description">
       <strong>Description:</strong> ${plugin.description}
     </p>
