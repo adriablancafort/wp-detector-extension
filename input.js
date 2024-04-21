@@ -277,15 +277,12 @@ const detectPluginsCard = (plugin) => `
 
 const detectPluginsSkeleton = `
 <div class="card border">
-  <div class="loading--image loading--skeleton"></div>
+  <div class="loading--banner loading--skeleton"></div>
   <div class="card--info-container">
     <div class="card--title-container__plugin">
       <div class="loading--icon card--icon loading--skeleton"></div>
       <h4 class="card--title loading-title loading--skeleton"></h4>
     </div>
-    <p class="loading-p loading--skeleton loading__30"></p>
-    <p class="loading-p loading--skeleton loading__30"></p>
-    <p class="loading-p loading--skeleton loading__30"></p>
     <p class="loading-p loading--skeleton loading__30"></p>
     <p class="loading-p loading--skeleton loading__30"></p>
     <p class="loading-p loading--skeleton loading__30"></p>
