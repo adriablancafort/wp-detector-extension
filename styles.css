@@ -206,6 +206,12 @@ h3 {
   border-bottom: 1px solid #cbcbcb;
 }
 
+.loading--banner {
+  width: 100%;
+  height: 200px;
+  border-bottom: 1px solid #cbcbcb;
+}
+
 .loading--icon {
   width: 60px;
   height: 60px;
