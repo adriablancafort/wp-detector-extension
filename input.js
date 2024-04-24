@@ -193,7 +193,7 @@ const detectWpSkeleton = `
 
 const detectThemesCard = (theme) => `
 <div class="card card--hover border">
-  <img src="${theme.banner}" alt="Theme Banner" class="card--banner" />
+  <img src="${theme.banner}" alt="Theme Banner" class="card--banner card--banner__theme loading--skeleton" />
   <div class="card--info-container">
     <h4 class="card--title">${theme.title}</h4>
     ${theme.author ? `<p>Author: <strong>${theme.author}</strong></p>` : ""}
@@ -217,7 +217,7 @@ const detectThemesCard = (theme) => `
 
 const detectThemesSkeleton = `
 <div class="card border">
-  <div class="loading--image loading--skeleton"></div>
+  <div class="card--banner card--banner__theme loading--skeleton"></div>
   <div class="card--info-container">
     <h4 class="card--title loading-title loading--skeleton"></h4>
     <p class="loading-p loading--skeleton loading__30"></p>
@@ -250,7 +250,7 @@ const noThemesDetected = (websiteName) => `
 
 const detectPluginsCard = (plugin) => `
 <div class="card card--hover border">
-  <img src="${plugin.banner}" alt="Plugin Banner" class="card--banner" />
+  <img src="${plugin.banner}" alt="Plugin Banner" class="card--banner card--banner__plugin loading--skeleton" />
   <div class="card--info-container">
     <div class="card--title-container__plugin">
       <img src="${plugin.icon}" alt="Plugin Icon" class="card--icon" width="60px" height="60px" />
@@ -277,7 +277,7 @@ const detectPluginsCard = (plugin) => `
 
 const detectPluginsSkeleton = `
 <div class="card border">
-  <div class="loading--banner loading--skeleton"></div>
+  <div class="card--banner card--banner__plugin loading--skeleton"></div>
   <div class="card--info-container">
     <div class="card--title-container__plugin">
       <div class="loading--icon card--icon loading--skeleton"></div>
