@@ -19,7 +19,7 @@
         "activeTab"
     ],
     "host_permissions": [
-        "<all_urls>"
+        "https://api.wp-detector.com/*"
     ],
     "content_scripts": [
         {
