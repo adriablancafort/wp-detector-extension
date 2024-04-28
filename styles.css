@@ -1,3 +1,15 @@
+@font-face {
+  font-family: "Inter";
+  font-weight: 400;
+  src: url("./fonts/inter-400.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-weight: 700;
+  src: url("./fonts/inter-700.woff2") format("woff2");
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -8,6 +20,7 @@
 html {
   scroll-behavior: smooth;
   scrollbar-width: thin;
+  scrollbar-color: #cfcfcf #f8f8ff;
 }
 
 body {
