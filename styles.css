@@ -255,3 +255,19 @@ h3 {
     background-position: left 20px top 0;
   }
 }
+
+.footer__links {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  font-size: 1rem;
+}
+
+.footer__links a {
+  color: #1e1e1e;
+  text-decoration: none;
+}
+
+.footer__links a:hover {
+  color: #606060;
+}
