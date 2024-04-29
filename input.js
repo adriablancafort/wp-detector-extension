@@ -193,12 +193,14 @@ const detectWpSkeleton = `
 
 const detectThemesCard = (theme) => `
 <div class="card card--hover border">
-  <img src="${theme.banner}" alt="Theme Banner" class="card--banner card--banner__theme loading--skeleton" />
+  <img src="${theme.screenshot}" alt="Theme Screenshot" class="card--banner card--banner__theme loading--skeleton" />
   <div class="card--info-container">
     <h4 class="card--title">${theme.title}</h4>
     ${theme.author ? `<p>Author: <strong>${theme.author}</strong></p>` : ""}
     ${theme.version ? `<p>Version: <span class="badge">${theme.version}</span></p>` : ""}
     ${theme.website && theme.sanatizedWebsite ? `<p>Website: <a href="${theme.website}" target="_blank">${theme.sanatizedWebsite}</a></p>` : ""}
+    ${theme.lastUpdated ? `<p>Last Updated: <strong>${theme.lastUpdated}</strong></p>` : ""}
+    ${theme.activeInstallations ? `<p>Active Installations: <strong>${theme.activeInstallations}</strong></p>` : ""}
     ${theme.reqWpVersion ? `<p>WordPress Version: <strong>${theme.reqWpVersion}</strong></p>` : ""}
     ${theme.testedWpVersion ? `<p>Tested up To: <strong>${theme.testedWpVersion}</strong></p>` : ""}
     ${theme.reqPhpVersion ? `<p>PHP Version: <strong>${theme.reqPhpVersion}</strong></p>` : ""}
@@ -259,6 +261,8 @@ const detectPluginsCard = (plugin) => `
     ${plugin.contributors ? `<p>Contributors: <strong>${plugin.contributors}</strong></p>` : ""}
     ${plugin.version ? `<p>Version: <span class="badge">${plugin.version}</span></p>` : ""}
     ${plugin.website && plugin.sanatizedWebsite ? `<p>Website: <a href="${plugin.website}" target="_blank">${plugin.sanatizedWebsite}</a></p>` : ""}
+    ${theme.lastUpdated ? `<p>Last Updated: <strong>${theme.lastUpdated}</strong></p>` : ""}
+    ${theme.activeInstallations ? `<p>Active Installations: <strong>${theme.activeInstallations}</strong></p>` : ""}
     ${plugin.reqWpVersion ? `<p>WordPress Version: <strong>${plugin.reqWpVersion}</strong></p>` : ""}
     ${plugin.testedWpVersion ? `<p>Tested up To: <strong>${plugin.testedWpVersion}</strong></p>` : ""}
     ${plugin.reqPhpVersion ? `<p>PHP Version: <strong>${plugin.reqPhpVersion}</strong></p>` : ""}
