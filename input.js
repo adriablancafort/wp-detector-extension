@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
             apiRequest(currentUrl, "themes").then((data) => {
               themesContainer.innerHTML = detectThemesTitle(websiteName);
 
-              if (data.themes) {
+              if (data.themes.length) {
                 data.themes.forEach((theme) => {
                   const themeCard = document.createElement("div");
                   themeCard.innerHTML = detectThemesCard(theme);
@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
             apiRequest(currentUrl, "plugins").then((data) => {
               pluginsContainer.innerHTML = detectPluginsTitle(websiteName);
 
-              if (data.plugins) {
+              if (data.plugins.length) {
                 data.plugins.forEach((plugin) => {
                   const pluginCard = document.createElement("div");
                   pluginCard.innerHTML = detectPluginsCard(plugin);
@@ -240,13 +240,13 @@ const detectThemesSkeleton = `
 </div>`;
 
 const noThemesDetected = (websiteName) => `
-<div class="card border">
-  <div class="loading--image loading--skeleton"></div>
-  <div class="card--info-container">
-    <div class="card--title-container__plugin">
-      <div class="loading--icon card--icon loading--skeleton"></div>
-      <h4 class="card--title">No themes detected in ${websiteName}</h4>
-    </div>
+<div class="card card__wp border">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="card--icon" width="66" height="54">
+    <path fill="#464342" stroke-width="1.5" fill-rule="evenodd"  d="M426.67 213.33V128H274.7l-53.96-42.67H42.67v341.34h372.58L480 213.33h-53.33ZM85.33 338.77V128h120.59l53.96 42.67H384v42.66H124.69L85.33 338.77ZM383.63 384H115.85l40.17-128h266.44l-38.83 128Z"/>
+  </svg>
+  <div>
+    <h4 class="card--title cart--title__fail">Bad news...</h4>
+    <p>No theme detected in <strong>${websiteName}</strong>.</p>
   </div>
 </div>`;
 
@@ -303,12 +303,12 @@ const detectPluginsSkeleton = `
 </div>`;
 
 const noPluginsDetected = (websiteName) => `
-<div class="card border">
-  <div class="loading--image loading--skeleton"></div>
-  <div class="card--info-container">
-    <div class="card--title-container__plugin">
-      <div class="loading--icon card--icon loading--skeleton"></div>
-      <h4 class="card--title">No plugins detected in ${websiteName}</h4>
-    </div>
+<div class="card card__wp border">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="card--icon" width="66" height="54">
+    <path stroke="#464342" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9v3a5 5 0 0 1-5 5M7 9v3a5 5 0 0 0 5 5m0 0v4M8 3v3m8-3v3M5 9h14"/>
+  </svg>
+  <div>
+    <h4 class="card--title cart--title__fail">Bad news...</h4>
+    <p>No plugins detected in <strong>${websiteName}</strong>.</p>
   </div>
 </div>`;
