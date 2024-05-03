@@ -261,8 +261,8 @@ const detectPluginsCard = (plugin) => `
     ${plugin.contributors ? `<p>Contributors: <strong>${plugin.contributors}</strong></p>` : ""}
     ${plugin.version ? `<p>Version: <span class="badge">${plugin.version}</span></p>` : ""}
     ${plugin.website && plugin.sanatizedWebsite ? `<p>Website: <a href="${plugin.website}" target="_blank">${plugin.sanatizedWebsite}</a></p>` : ""}
-    ${theme.lastUpdated ? `<p>Last Updated: <strong>${theme.lastUpdated}</strong></p>` : ""}
-    ${theme.activeInstallations ? `<p>Active Installations: <strong>${theme.activeInstallations}</strong></p>` : ""}
+    ${plugin.lastUpdated ? `<p>Last Updated: <strong>${plugin.lastUpdated}</strong></p>` : ""}
+    ${plugin.activeInstallations ? `<p>Active Installations: <strong>${plugin.activeInstallations}</strong></p>` : ""}
     ${plugin.reqWpVersion ? `<p>WordPress Version: <strong>${plugin.reqWpVersion}</strong></p>` : ""}
     ${plugin.testedWpVersion ? `<p>Tested up To: <strong>${plugin.testedWpVersion}</strong></p>` : ""}
     ${plugin.reqPhpVersion ? `<p>PHP Version: <strong>${plugin.reqPhpVersion}</strong></p>` : ""}
