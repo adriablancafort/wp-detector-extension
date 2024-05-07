@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
           if (response.detected) {
             wpContainer.innerHTML = detectWpSuccess(websiteName);
 
-            apiRequest(currentUrl, "themes").then((data) => {
+            apiRequest("themes", inputUrl, null, null).then((data) => {
               themesContainer.innerHTML = detectThemesTitle(websiteName);
 
               if (data.themes.length) {
@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
               }
             });
 
-            apiRequest(currentUrl, "plugins").then((data) => {
+            apiRequest("plugins", inputUrl, null, null).then((data) => {
               pluginsContainer.innerHTML = detectPluginsTitle(websiteName);
 
               if (data.plugins.length) {
@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
             pluginsContainer.innerHTML += detectPluginsSkeleton;
             pluginsContainer.innerHTML += detectPluginsSkeleton;
 
-            apiRequest(currentUrl, "top-themes").then((data) => {
+            apiRequest("top-themes", null, 5, 1).then((data) => {
               themesContainer.innerHTML = topThemesTitle;
               data.themes.forEach((theme) => {
                 const themeCard = document.createElement("div");
@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
               });
             });
 
-            apiRequest(currentUrl, "top-plugins").then((data) => {
+            apiRequest("top-plugins", null, 5, 1).then((data) => {
               pluginsContainer.innerHTML = topPluginsTitle;
               data.plugins.forEach((plugin) => {
                 const pluginCard = document.createElement("div");
@@ -117,10 +117,9 @@ const formatWebsiteName = (url) => {
   return url;
 };
 
-const apiRequest = (inputUrl, type) => {
+const apiRequest = (type, inputUrl, quantity, page) => {
   return fetch(
-    `https://api.wp-detector.com?url=${inputUrl}&type=${type}`,
-    { mode: "no-cors" }
+    `https://api.wp-detector.com?type=${type}&url=${inputUrl}&quantity=${quantity}&page=${page}`
   ).then((response) => response.json());
 };
 
