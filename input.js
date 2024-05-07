@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
           if (response.detected) {
             wpContainer.innerHTML = detectWpSuccess(websiteName);
 
-            apiRequest("themes", inputUrl, null, null).then((data) => {
+            apiRequest("themes", currentUrl, null, null).then((data) => {
               themesContainer.innerHTML = detectThemesTitle(websiteName);
 
               if (data.themes.length) {
@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
               }
             });
 
-            apiRequest("plugins", inputUrl, null, null).then((data) => {
+            apiRequest("plugins", currentUrl, null, null).then((data) => {
               pluginsContainer.innerHTML = detectPluginsTitle(websiteName);
 
               if (data.plugins.length) {
@@ -117,9 +117,9 @@ const formatWebsiteName = (url) => {
   return url;
 };
 
-const apiRequest = (type, inputUrl, quantity, page) => {
+const apiRequest = (type, currentUrl, quantity, page) => {
   return fetch(
-    `https://api.wp-detector.com?type=${type}&url=${inputUrl}&quantity=${quantity}&page=${page}`
+    `https://api.wp-detector.com?type=${type}&url=${currentUrl}&quantity=${quantity}&page=${page}`
   ).then((response) => response.json());
 };
 
