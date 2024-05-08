@@ -15,8 +15,7 @@
         "service_worker": "service-worker.js"
     },
     "permissions": [
-        "tabs",
-        "activeTab"
+        "tabs"
     ],
     "host_permissions": [
         "https://api.wp-detector.com/*"
