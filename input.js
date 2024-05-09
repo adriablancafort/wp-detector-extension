@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const pluginsContainer = document.getElementById("pluginsContainer");
 
   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-    let currentUrl = tabs[0].url;
+    let currentUrl = tabs[0].url.replace(/\/$/, "");
     const websiteName = formatWebsiteName(currentUrl);
 
     // Wordpress Detected container
