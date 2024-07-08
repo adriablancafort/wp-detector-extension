@@ -201,6 +201,13 @@ button:focus {
   overflow: hidden;
 }
 
+.contributors {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 .cart--read-more--container {
   position: relative;
   height: 1.5rem;

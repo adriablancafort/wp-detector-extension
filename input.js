@@ -270,7 +270,7 @@ const detectPluginsCard = (plugin) => `
       <img src="${plugin.icon}" alt="Plugin Icon" class="card--icon" width="60px" height="60px" />
       <h4 class="card--title">${plugin.title}</h4>
     </div>
-    ${plugin.contributors ? `<p>Contributors: <strong>${plugin.contributors}</strong></p>` : ""}
+    ${plugin.contributors ? `<p class="contributors">Contributors: <strong>${plugin.contributors}</strong></p>` : ""}
     ${plugin.version ? `<p>Version: <span class="badge">${plugin.version}</span></p>` : ""}
     ${plugin.website && plugin.sanatizedWebsite ? `<p>Website: <a href="${plugin.website}" target="_blank">${plugin.sanatizedWebsite}</a></p>` : ""}
     ${plugin.lastUpdated ? `<p>Last Updated: <strong>${plugin.lastUpdated}</strong></p>` : ""}
