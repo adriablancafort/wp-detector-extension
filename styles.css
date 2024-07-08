@@ -44,6 +44,37 @@ h3 {
   font-size: 18px;
 }
 
+a {
+  color: #1e1e1e;
+}
+
+a:hover {
+  color: #606060;
+}
+
+button {
+  color: #fff;
+  background-color: #3858e9;
+  border-radius: 2px;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+}
+
+button:hover {
+  background-color: #213fd4;
+}
+
+button:focus {
+  outline: none;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
 .border {
   border: 1px solid #cbcbcb;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -264,10 +295,5 @@ h3 {
 }
 
 .footer__links a {
-  color: #1e1e1e;
   text-decoration: none;
-}
-
-.footer__links a:hover {
-  color: #606060;
 }

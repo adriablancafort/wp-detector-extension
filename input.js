@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const websiteName = formatWebsiteName(currentUrl);
 
     // Wordpress Detected container
-    wpContainer.innerHTML += detectWpSkeleton;
+    wpContainer.innerHTML = detectWpSkeleton;
 
     // Themes Detected container
     themesContainer.innerHTML = analyzingThemesTitle(websiteName);
@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
                   pluginsContainer.appendChild(pluginCard);
                 });
               } else {
-                wpContainer.innerHTML += detectWpFail(websiteName);
+                pluginsContainer.innerHTML += noPluginsDetected(websiteName);
               }
             });
           } else {
@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
             pluginsContainer.innerHTML += detectPluginsSkeleton;
             pluginsContainer.innerHTML += detectPluginsSkeleton;
 
-            apiRequest("top-themes", null, 5, 1).then((data) => {
+            apiRequest("top-themes", null, 3, 1).then((data) => {
               themesContainer.innerHTML = topThemesTitle;
               data.themes.forEach((theme) => {
                 const themeCard = document.createElement("div");
@@ -86,9 +86,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
                 themesContainer.appendChild(themeCard);
               });
+              themesContainer.innerHTML += Button("View all Most Detected Themes", "https://wp-detector.com/top-themes");
             });
 
-            apiRequest("top-plugins", null, 5, 1).then((data) => {
+            apiRequest("top-plugins", null, 3, 1).then((data) => {
               pluginsContainer.innerHTML = topPluginsTitle;
               data.plugins.forEach((plugin) => {
                 const pluginCard = document.createElement("div");
@@ -100,6 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
                 pluginsContainer.appendChild(pluginCard);
               });
+              pluginsContainer.innerHTML += Button("View all Most Detected Plugins", "https://wp-detector.com/top-plugins");
             });
           }
         }
@@ -125,6 +127,13 @@ const apiRequest = (type, currentUrl, quantity, page) => {
 
 // Elements
 
+const Button = (text, link) => `
+<div class="button-container">
+  <a href="${link}" target="_blank">
+    <button>${text}</button>
+  </a>
+</div>`;
+
 const analyzingThemesTitle = (websiteName) => `
 <h3 class="input--section-title input--section-title__analyzing">
   Analyzing themes in <strong>${websiteName}</strong>
@@ -147,12 +156,12 @@ const detectPluginsTitle = (websiteName) => `
 
 const topThemesTitle = `
 <h3 class="input--section-title">
-  Top 5 most commonly detected <strong>themes</strong>:
+  Top 3 most commonly detected <strong>themes</strong>:
 </h3>`;
 
 const topPluginsTitle = `
 <h3 class="input--section-title">
-  Top 5 most commonly detected <strong>plugins</strong>:
+  Top 3 most commonly detected <strong>plugins</strong>:
 </h3>`;
 
 const detectWpSuccess = (websiteName) => `
