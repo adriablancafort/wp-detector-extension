@@ -86,7 +86,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
                 themesContainer.appendChild(themeCard);
               });
-              themesContainer.innerHTML += Button("View all Most Detected Themes", "https://wp-detector.com/top-themes");
+              const viewMoreButton = document.createElement("div");
+              viewMoreButton.innerHTML = viewMore("View all Most Detected Themes", "https://wp-detector.com/top-themes");
+              themesContainer.appendChild(viewMoreButton);
             });
 
             apiRequest("top-plugins", null, 3, 1).then((data) => {
@@ -101,7 +103,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
                 pluginsContainer.appendChild(pluginCard);
               });
-              pluginsContainer.innerHTML += Button("View all Most Detected Plugins", "https://wp-detector.com/top-plugins");
+              const viewMoreButton = document.createElement("div");
+              viewMoreButton.innerHTML = viewMore("View all Most Detected Plugins", "https://wp-detector.com/top-plugins");
+              themesContainer.appendChild(viewMoreButton);
             });
           }
         }
@@ -127,7 +131,7 @@ const apiRequest = (type, currentUrl, quantity, page) => {
 
 // Elements
 
-const Button = (text, link) => `
+const viewMore = (text, link) => `
 <div class="button-container">
   <a href="${link}" target="_blank">
     <button>${text}</button>
