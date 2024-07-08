@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
               });
               const viewMoreButton = document.createElement("div");
               viewMoreButton.innerHTML = viewMore("View all Most Detected Plugins", "https://wp-detector.com/top-plugins");
-              themesContainer.appendChild(viewMoreButton);
+              pluginsContainer.appendChild(viewMoreButton);
             });
           }
         }
