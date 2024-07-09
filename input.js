@@ -28,6 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
           if (response.detected) {
             wpContainer.innerHTML = detectWpSuccess(websiteName);
 
+            apiRequest("wp", currentUrl, null, null); // Trigger API request
             apiRequest("themes", currentUrl, null, null).then((data) => {
               themesContainer.innerHTML = detectThemesTitle(websiteName);
 
