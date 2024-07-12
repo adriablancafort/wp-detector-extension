@@ -28,85 +28,51 @@ document.addEventListener("DOMContentLoaded", () => {
           if (response.detected) {
             wpContainer.innerHTML = detectWpSuccess(websiteName);
 
-            apiRequest("themes", currentUrl, null, null).then((data) => {
-              themesContainer.innerHTML = detectThemesTitle(websiteName);
+            apiRequest("wp", currentUrl, null, null).then((data) => {
+              if (data.wp === true) {
+                apiRequest("themes", currentUrl, null, null).then((data) => {
+                  themesContainer.innerHTML = detectThemesTitle(websiteName);
 
-              if (data.themes.length) {
-                data.themes.forEach((theme) => {
-                  const themeCard = document.createElement("div");
-                  themeCard.innerHTML = detectThemesCard(theme);
-                  if (theme.link) {
-                    themeCard.addEventListener("click", () => {
-                      window.open(theme.link, "_blank");
+                  if (data.themes.length) {
+                    data.themes.forEach((theme) => {
+                      const themeCard = document.createElement("div");
+                      themeCard.innerHTML = detectThemesCard(theme);
+                      if (theme.link) {
+                        themeCard.addEventListener("click", () => {
+                          window.open(theme.link, "_blank");
+                        });
+                      }
+                      themesContainer.appendChild(themeCard);
                     });
+                  } else {
+                    themesContainer.innerHTML += noThemesDetected(websiteName);
                   }
-                  themesContainer.appendChild(themeCard);
+                });
+
+                apiRequest("plugins", currentUrl, null, null).then((data) => {
+                  pluginsContainer.innerHTML = detectPluginsTitle(websiteName);
+
+                  if (data.plugins.length) {
+                    data.plugins.forEach((plugin) => {
+                      const pluginCard = document.createElement("div");
+                      pluginCard.innerHTML = detectPluginsCard(plugin);
+                      if (plugin.link) {
+                        pluginCard.addEventListener("click", () => {
+                          window.open(plugin.link, "_blank");
+                        });
+                      }
+                      pluginsContainer.appendChild(pluginCard);
+                    });
+                  } else {
+                    pluginsContainer.innerHTML += noPluginsDetected(websiteName);
+                  }
                 });
               } else {
-                themesContainer.innerHTML += noThemesDetected(websiteName);
-              }
-            });
-
-            apiRequest("plugins", currentUrl, null, null).then((data) => {
-              pluginsContainer.innerHTML = detectPluginsTitle(websiteName);
-
-              if (data.plugins.length) {
-                data.plugins.forEach((plugin) => {
-                  const pluginCard = document.createElement("div");
-                  pluginCard.innerHTML = detectPluginsCard(plugin);
-                  if (plugin.link) {
-                    pluginCard.addEventListener("click", () => {
-                      window.open(plugin.link, "_blank");
-                    });
-                  }
-                  pluginsContainer.appendChild(pluginCard);
-                });
-              } else {
-                pluginsContainer.innerHTML += noPluginsDetected(websiteName);
+                notDetected(websiteName, currentUrl, wpContainer, themesContainer, pluginsContainer)
               }
             });
           } else {
-            wpContainer.innerHTML = detectWpFail(websiteName);
-            themesContainer.innerHTML = topThemesTitle;
-            themesContainer.innerHTML += detectThemesSkeleton;
-            pluginsContainer.innerHTML = topPluginsTitle;
-            pluginsContainer.innerHTML += detectPluginsSkeleton;
-            pluginsContainer.innerHTML += detectPluginsSkeleton;
-            pluginsContainer.innerHTML += detectPluginsSkeleton;
-
-            apiRequest("top-themes", null, 3, 1).then((data) => {
-              themesContainer.innerHTML = topThemesTitle;
-              data.themes.forEach((theme) => {
-                const themeCard = document.createElement("div");
-                themeCard.innerHTML = detectThemesCard(theme);
-                if (theme.link) {
-                  themeCard.addEventListener("click", () => {
-                    window.open(theme.link, "_blank");
-                  });
-                }
-                themesContainer.appendChild(themeCard);
-              });
-              const viewMoreButton = document.createElement("div");
-              viewMoreButton.innerHTML = viewMore("View all Most Detected Themes", "https://wp-detector.com/top-themes");
-              themesContainer.appendChild(viewMoreButton);
-            });
-
-            apiRequest("top-plugins", null, 3, 1).then((data) => {
-              pluginsContainer.innerHTML = topPluginsTitle;
-              data.plugins.forEach((plugin) => {
-                const pluginCard = document.createElement("div");
-                pluginCard.innerHTML = detectPluginsCard(plugin);
-                if (plugin.link) {
-                  pluginCard.addEventListener("click", () => {
-                    window.open(plugin.link, "_blank");
-                  });
-                }
-                pluginsContainer.appendChild(pluginCard);
-              });
-              const viewMoreButton = document.createElement("div");
-              viewMoreButton.innerHTML = viewMore("View all Most Detected Plugins", "https://wp-detector.com/top-plugins");
-              pluginsContainer.appendChild(viewMoreButton);
-            });
+            notDetected(websiteName, currentUrl, wpContainer, themesContainer, pluginsContainer)
           }
         }
       }
@@ -127,6 +93,52 @@ const apiRequest = (type, currentUrl, quantity, page) => {
   return fetch(
     `https://api.wp-detector.com?type=${type}&url=${currentUrl}&quantity=${quantity}&page=${page}`
   ).then((response) => response.json());
+};
+
+function notDetected(websiteName, currentUrl, wpContainer, themesContainer, pluginsContainer) {
+  wpContainer.innerHTML = detectWpFail(websiteName);
+  themesContainer.innerHTML = topThemesTitle;
+  themesContainer.innerHTML += detectThemesSkeleton;
+  pluginsContainer.innerHTML = topPluginsTitle;
+  pluginsContainer.innerHTML += detectPluginsSkeleton;
+  pluginsContainer.innerHTML += detectPluginsSkeleton;
+  pluginsContainer.innerHTML += detectPluginsSkeleton;
+
+  apiRequest("wp", currentUrl, null, null).then(() => {
+    apiRequest("top-themes", null, 3, 1).then((data) => {
+      themesContainer.innerHTML = topThemesTitle;
+      data.themes.forEach((theme) => {
+        const themeCard = document.createElement("div");
+        themeCard.innerHTML = detectThemesCard(theme);
+        if (theme.link) {
+          themeCard.addEventListener("click", () => {
+            window.open(theme.link, "_blank");
+          });
+        }
+        themesContainer.appendChild(themeCard);
+      });
+      const viewMoreButton = document.createElement("div");
+      viewMoreButton.innerHTML = viewMore("View all Most Detected Themes", "https://wp-detector.com/top-themes");
+      themesContainer.appendChild(viewMoreButton);
+    });
+
+    apiRequest("top-plugins", null, 3, 1).then((data) => {
+      pluginsContainer.innerHTML = topPluginsTitle;
+      data.plugins.forEach((plugin) => {
+        const pluginCard = document.createElement("div");
+        pluginCard.innerHTML = detectPluginsCard(plugin);
+        if (plugin.link) {
+          pluginCard.addEventListener("click", () => {
+            window.open(plugin.link, "_blank");
+          });
+        }
+        pluginsContainer.appendChild(pluginCard);
+      });
+      const viewMoreButton = document.createElement("div");
+      viewMoreButton.innerHTML = viewMore("View all Most Detected Plugins", "https://wp-detector.com/top-plugins");
+      pluginsContainer.appendChild(viewMoreButton);
+    });
+  });
 };
 
 // Elements
