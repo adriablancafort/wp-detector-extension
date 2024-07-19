@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const wpContainer = document.getElementById("wpContainer");
   const themesContainer = document.getElementById("themesContainer");
   const pluginsContainer = document.getElementById("pluginsContainer");
+  const reviewContainer = document.getElementById("reviewContainer");
 
   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
     let currentUrl = tabs[0].url.replace(/\/$/, "");
@@ -63,6 +64,9 @@ document.addEventListener("DOMContentLoaded", () => {
                       }
                       pluginsContainer.appendChild(pluginCard);
                     });
+                    if (data.plugins.length > 5) {
+                      reviewContainer.innerHTML = leaveReview;
+                    }
                   } else {
                     pluginsContainer.innerHTML += noPluginsDetected(websiteName);
                   }
@@ -334,5 +338,18 @@ const noPluginsDetected = (websiteName) => `
   <div>
     <h4 class="card--title cart--title__fail">Bad news...</h4>
     <p>No plugins detected in <strong>${websiteName}</strong>.</p>
+  </div>
+</div>`;
+
+const leaveReview = `
+<div class="card card__review border">
+  <h4 class="card--title">How was your experience?</h4>
+  <p>Your opinion can be very helpful for other users.</p>
+  <div class="star-rating">
+    <a href="https://wp-detector.com/extension-review?stars=5&browser=chrome" target="_blank">&#9733;</a>
+    <a href="https://wp-detector.com/extension-review?stars=4&browser=chrome" target="_blank">&#9733;</a>
+    <a href="https://wp-detector.com/extension-review?stars=3&browser=chrome" target="_blank">&#9733;</a>
+    <a href="https://wp-detector.com/extension-review?stars=2&browser=chrome" target="_blank">&#9733;</a>
+    <a href="https://wp-detector.com/extension-review?stars=1&browser=chrome" target="_blank">&#9733;</a>
   </div>
 </div>`;

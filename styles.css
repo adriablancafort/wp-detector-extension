@@ -252,6 +252,32 @@ button:focus {
   margin-top: 0.5rem;
 }
 
+.card__review {
+  padding: 1.5rem;
+}
+
+.card__review .card--title {
+  margin-bottom: 1rem;
+}
+
+.star-rating {
+  display: flex;
+  flex-direction: row-reverse;
+  font-size: 2.5em;
+  justify-content: space-around;
+  width: 5em;
+}
+
+.star-rating a {
+  color: #cacaca;
+  text-decoration: none;
+}
+
+.star-rating a:hover,
+.star-rating a:hover ~ a {
+  color: #ffcf0d;
+}
+
 .loading--skeleton {
   background: linear-gradient(110deg, #ededed 40%, #fff, #ededed 60%);
   background-size: 270%;
