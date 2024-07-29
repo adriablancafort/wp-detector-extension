@@ -11,7 +11,10 @@ const set_badge_color = (detected) => {
 const sendMessageToTab = (tabId) => {
   chrome.tabs.sendMessage(tabId, { message: "wp_detected" }, (response) => {
     if (chrome.runtime.lastError) {
-      // tab is not ready yet
+      // Tab is not ready yet
+      setTimeout(() => {
+        sendMessageToTab(tabId);
+      }, 200);
       return;
     }
     if (response && response.detected !== undefined) {
@@ -27,7 +30,7 @@ chrome.tabs.onActivated.addListener((activeInfo) => {
 
 // Update the badge when the page is refreshed / changed
 chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
-  if (changeInfo.status === "complete") {
+  if (changeInfo.status === "loading") {
     sendMessageToTab(tabId);
   }
 });
