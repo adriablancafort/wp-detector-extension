@@ -34,3 +34,8 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
     sendMessageToTab(tabId);
   }
 });
+
+// Redirect to feedback page on uninstall
+chrome.runtime.onInstalled.addListener(() => {
+  chrome.runtime.setUninstallURL('https://wp-detector.com/extension-uninstall');
+});
