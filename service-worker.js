@@ -14,7 +14,7 @@ const sendMessageToTab = (tabId) => {
       // Tab is not ready yet
       setTimeout(() => {
         sendMessageToTab(tabId);
-      }, 200);
+      }, 100);
       return;
     }
     if (response && response.detected !== undefined) {
@@ -32,6 +32,13 @@ chrome.tabs.onActivated.addListener((activeInfo) => {
 chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
   if (changeInfo.status === "loading") {
     sendMessageToTab(tabId);
+  }
+});
+
+// Listen for messages from the popup script
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.action === "update_badge") {
+    set_badge_color(message.detected);
   }
 });
 
