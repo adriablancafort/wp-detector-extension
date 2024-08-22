@@ -107,7 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
               themesContainer.appendChild(themeCard);
             });
             const viewMoreButton = document.createElement("div");
-            viewMoreButton.innerHTML = viewMore("View all Most Detected Themes", "https://wp-detector.com/top-themes");
+            viewMoreButton.innerHTML = viewMore("View all Most Detected Themes", "https://wp-detector.com/top-themes/?utm_source=chrome-extension");
             themesContainer.appendChild(viewMoreButton);
           });
 
@@ -124,7 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
               pluginsContainer.appendChild(pluginCard);
             });
             const viewMoreButton = document.createElement("div");
-            viewMoreButton.innerHTML = viewMore("View all Most Detected Plugins", "https://wp-detector.com/top-plugins");
+            viewMoreButton.innerHTML = viewMore("View all Most Detected Plugins", "https://wp-detector.com/top-plugins/?utm_source=chrome-extension");
             pluginsContainer.appendChild(viewMoreButton);
           });
         });
