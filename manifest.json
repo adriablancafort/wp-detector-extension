@@ -1,8 +1,8 @@
 {
     "manifest_version": 3,
     "name": "WordPress Theme and Plugin Detector",
-    "description": "Detect WordPress Themes and Plugins as you browse!",
-    "version": "1.6.3",
+    "description": "WordPress Theme and Plugin Detector detects all the installed WordPress Themes and WordPress Plugins on the Websites you visit",
+    "version": "1.6.4",
     "icons": {
         "16": "icon-16.png",
         "48": "icon-48.png",
@@ -27,3 +27,6 @@
         }
     ]
 }
+
+
+
