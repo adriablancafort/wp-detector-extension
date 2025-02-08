@@ -1,8 +1,8 @@
 {
     "manifest_version": 3,
-    "name": "WordPress Theme and Plugin Detector",
-    "description": "WordPress Theme and Plugin Detector detects all the installed WordPress Themes and WordPress Plugins on the Websites you visit",
-    "version": "1.6.5",
+    "name": "__MSG_extensionName__",
+    "description": "__MSG_extensionDescription__",
+    "version": "1.6.7",
     "icons": {
         "16": "icon-16.png",
         "48": "icon-48.png",
@@ -20,6 +20,7 @@
     "host_permissions": [
         "https://api.wp-detector.com/*"
     ],
+    "default_locale": "en",
     "content_scripts": [
         {
             "matches": ["<all_urls>"],
