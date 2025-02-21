@@ -1,0 +1,8 @@
+{
+    "extensionName": {
+        "message": "WordPress tema- och tilläggsdetektorn"
+    },
+    "extensionDescription": {
+        "message": "WordPress tema- och tilläggsdetektorn hittar alla WordPress-teman och tillägg installerade på webbplatserna du besöker"
+    }
+}

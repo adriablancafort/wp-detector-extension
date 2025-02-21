@@ -1,0 +1,8 @@
+{
+    "extensionName": {
+        "message": "Trình phát hiện Theme và Plugin WordPress"
+    },
+    "extensionDescription": {
+        "message": "Phát hiện tất cả các Theme và Plugin WordPress đã cài đặt trên các trang web bạn truy cập"
+    }
+}

@@ -1,0 +1,8 @@
+{
+    "extensionName": {
+        "message": "Детектор тем и плагинов WordPress"
+    },
+    "extensionDescription": {
+        "message": "Детектор тем и плагинов WordPress находит все темы и плагины WordPress, установленные на посещаемых вами сайтах"
+    }
+}

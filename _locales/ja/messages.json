@@ -1,0 +1,8 @@
+{
+    "extensionName": {
+        "message": "WordPress テーマとプラグイン検出器"
+    },
+    "extensionDescription": {
+        "message": "WordPress テーマとプラグイン検出器は、訪問したウェブサイトにインストールされているすべての WordPress テーマとプラグインを検出します"
+    }
+}

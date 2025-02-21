@@ -1,0 +1,8 @@
+{
+    "extensionName": {
+        "message": "WordPress主题和插件检测器"
+    },
+    "extensionDescription": {
+        "message": "检测您访问的网站上安装的所有WordPress主题和WordPress插件"
+    }
+}
