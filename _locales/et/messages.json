@@ -1,0 +1,8 @@
+{
+    "extensionName": {
+        "message": "WordPressi teema ja plugina detektor"
+    },
+    "extensionDescription": {
+        "message": "WordPressi teema ja plugina detektor tuvastab kõik installitud WordPressi teemad ja pluginad külastatud veebisaitidel"
+    }
+}
