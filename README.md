@@ -2,7 +2,7 @@
 
 ## Detect WordPress Themes and Plugins as you browse!
 
-[![Watch the video](https://img.youtube.com/vi/pF2qcnx521M/0.jpg)](https://www.youtube.com/watch?v=pF2qcnx521M)
+[![Watch the video](https://img.youtube.com/vi/pF2qcnx521M/maxresdefault.jpg)](https://www.youtube.com/watch?v=pF2qcnx521M)
 
 - 🟩 When you visit a website USING with WordPress, the badge will turn GREEN.
 - 🟥 When you visit a website NOT USING with WordPress, the badge will turn RED.
@@ -59,3 +59,7 @@ If you would like to detect WordPress themes and Plugins as you browse, look no 
 To report an issue or make a suggestion please visit our [report issue](https://wp-detector.com/report-issue) page.
 
 For more information about the extension privacy policy, please visit our [privacy policy](https://wp-detector.com/extension-privacy-policy) page.
+
+## Extension weekly active users:
+
+<img alt="Extension weekly active users" src="https://github.com/user-attachments/assets/99cde98f-c2f1-4c7e-85fc-9b1ae4dea2ee" />
