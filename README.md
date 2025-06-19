@@ -62,4 +62,4 @@ For more information about the extension privacy policy, please visit our [priva
 
 ## Extension weekly active users:
 
-<img alt="Extension weekly active users" src="https://github.com/user-attachments/assets/99cde98f-c2f1-4c7e-85fc-9b1ae4dea2ee" />
+<img alt="Extension weekly active users" src="https://github.com/user-attachments/assets/850c8d27-24ee-4b3e-bcee-0231a19d32ea" />
